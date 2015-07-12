@@ -4,7 +4,10 @@ df<-read.table("household_power_consumption.txt",header = TRUE, sep = ";", na.st
 df$Date<-as.Date(df$Date, "%d/%m/%Y")
 #subset
 dfs<-df[(df$Date >= as.Date("2007-02-01", "%Y-%m-%d") & df$Date <= as.Date("2007-02-02", "%Y-%m-%d")),]
-#create histogram
-png(filename="plot1.png")
-hist(dfs$Global_active_power, col = "red", xlab = "Global active power (killowats)", main = "Global active power")
+#Create DateTime column
+datetime <- paste(as.Date(dfs$Date), dfs$Time)
+dfs$DateTime <- as.POSIXct(datetime)
+#Create and save plot
+png(filename="plot2.png")
+plot(dfs$DateTime, dfs$Global_active_power, type="l", xlab="", ylab="Global Active Power (kilowatts)")
 dev.off()
