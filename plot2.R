@@ -9,5 +9,7 @@ datetime <- paste(as.Date(dfs$Date), dfs$Time)
 dfs$DateTime <- as.POSIXct(datetime)
 #Create and save plot
 png(filename="plot2.png")
+Sys.setlocale("LC_TIME", "English")
 plot(dfs$DateTime, dfs$Global_active_power, type="l", xlab="", ylab="Global Active Power (kilowatts)")
 dev.off()
+Sys.setlocale("LC_TIME", "Russian")
